@@ -17,7 +17,7 @@
 #ifndef JOINT_LIMITS_INTERFACE__JOINT_LIMITS_INTERFACE_HPP_
 #define JOINT_LIMITS_INTERFACE__JOINT_LIMITS_INTERFACE_HPP_
 
-#include <hardware_interface/joint_handle.hpp>
+#include "transmission_interface/handle.hpp"
 #include <hardware_interface/types/hardware_interface_type_values.hpp>
 
 #include <rclcpp/duration.hpp>
@@ -54,7 +54,7 @@ public:
   }
 
   JointLimitHandle(
-    const hardware_interface::JointHandle & jposh, const hardware_interface::JointHandle & jcmdh,
+    const transmission_interface::JointHandle & jposh, const transmission_interface::JointHandle & jcmdh,
     const JointLimits & limits)
   : jposh_(jposh),
     jvelh_(hardware_interface::HW_IF_VELOCITY),
@@ -66,8 +66,8 @@ public:
   }
 
   JointLimitHandle(
-    const hardware_interface::JointHandle & jposh, const hardware_interface::JointHandle & jvelh,
-    const hardware_interface::JointHandle & jcmdh, const JointLimits & limits)
+    const transmission_interface::JointHandle & jposh, const transmission_interface::JointHandle & jvelh,
+    const transmission_interface::JointHandle & jcmdh, const JointLimits & limits)
   : jposh_(jposh),
     jvelh_(jvelh),
     jcmdh_(jcmdh),
@@ -95,9 +95,9 @@ public:
   }
 
 protected:
-  hardware_interface::JointHandle jposh_;
-  hardware_interface::JointHandle jvelh_;
-  hardware_interface::JointHandle jcmdh_;
+  transmission_interface::JointHandle jposh_;
+  transmission_interface::JointHandle jvelh_;
+  transmission_interface::JointHandle jcmdh_;
   joint_limits_interface::JointLimits limits_;
 
   // stored state - track position and velocity of last update
@@ -126,15 +126,15 @@ public:
   JointSoftLimitsHandle() {}
 
   JointSoftLimitsHandle(
-    const hardware_interface::JointHandle & jposh, const hardware_interface::JointHandle & jcmdh,
+    const transmission_interface::JointHandle & jposh, const transmission_interface::JointHandle & jcmdh,
     const JointLimits & limits, const SoftJointLimits & soft_limits)
   : JointLimitHandle(jposh, jcmdh, limits), soft_limits_(soft_limits)
   {
   }
 
   JointSoftLimitsHandle(
-    const hardware_interface::JointHandle & jposh, const hardware_interface::JointHandle & jvelh,
-    const hardware_interface::JointHandle & jcmdh, const JointLimits & limits,
+    const transmission_interface::JointHandle & jposh, const transmission_interface::JointHandle & jvelh,
+    const transmission_interface::JointHandle & jcmdh, const JointLimits & limits,
     const SoftJointLimits & soft_limits)
   : JointLimitHandle(jposh, jvelh, jcmdh, limits), soft_limits_(soft_limits)
   {
@@ -152,7 +152,7 @@ public:
   PositionJointSaturationHandle() {}
 
   PositionJointSaturationHandle(
-    const hardware_interface::JointHandle & jposh, const hardware_interface::JointHandle & jcmdh,
+    const transmission_interface::JointHandle & jposh, const transmission_interface::JointHandle & jcmdh,
     const JointLimits & limits)
   : JointLimitHandle(jposh, jcmdh, limits)
   {
@@ -243,7 +243,7 @@ public:
   PositionJointSoftLimitsHandle() {}
 
   PositionJointSoftLimitsHandle(
-    const hardware_interface::JointHandle & jposh, const hardware_interface::JointHandle & jcmdh,
+    const transmission_interface::JointHandle & jposh, const transmission_interface::JointHandle & jcmdh,
     const joint_limits_interface::JointLimits & limits,
     const joint_limits_interface::SoftJointLimits & soft_limits)
   : JointSoftLimitsHandle(jposh, jcmdh, limits, soft_limits)
@@ -330,8 +330,8 @@ public:
   EffortJointSaturationHandle() {}
 
   EffortJointSaturationHandle(
-    const hardware_interface::JointHandle & jposh, const hardware_interface::JointHandle & jvelh,
-    const hardware_interface::JointHandle & jcmdh,
+    const transmission_interface::JointHandle & jposh, const transmission_interface::JointHandle & jvelh,
+    const transmission_interface::JointHandle & jcmdh,
     const joint_limits_interface::JointLimits & limits)
   : JointLimitHandle(jposh, jvelh, jcmdh, limits)
   {
@@ -350,10 +350,10 @@ public:
   }
 
   EffortJointSaturationHandle(
-    const hardware_interface::JointHandle & jposh, const hardware_interface::JointHandle & jcmdh,
+    const transmission_interface::JointHandle & jposh, const transmission_interface::JointHandle & jcmdh,
     const joint_limits_interface::JointLimits & limits)
   : EffortJointSaturationHandle(
-      jposh, hardware_interface::JointHandle(hardware_interface::HW_IF_VELOCITY), jcmdh, limits)
+      jposh, transmission_interface::JointHandle(hardware_interface::HW_IF_VELOCITY), jcmdh, limits)
   {
   }
 
@@ -404,8 +404,8 @@ public:
   EffortJointSoftLimitsHandle() {}
 
   EffortJointSoftLimitsHandle(
-    const hardware_interface::JointHandle & jposh, const hardware_interface::JointHandle & jvelh,
-    const hardware_interface::JointHandle & jcmdh,
+    const transmission_interface::JointHandle & jposh, const transmission_interface::JointHandle & jvelh,
+    const transmission_interface::JointHandle & jcmdh,
     const joint_limits_interface::JointLimits & limits,
     const joint_limits_interface::SoftJointLimits & soft_limits)
   : JointSoftLimitsHandle(jposh, jvelh, jcmdh, limits, soft_limits)
@@ -425,11 +425,11 @@ public:
   }
 
   EffortJointSoftLimitsHandle(
-    const hardware_interface::JointHandle & jposh, const hardware_interface::JointHandle & jcmdh,
+    const transmission_interface::JointHandle & jposh, const transmission_interface::JointHandle & jcmdh,
     const joint_limits_interface::JointLimits & limits,
     const joint_limits_interface::SoftJointLimits & soft_limits)
   : EffortJointSoftLimitsHandle(
-      jposh, hardware_interface::JointHandle(hardware_interface::HW_IF_VELOCITY), jcmdh, limits,
+      jposh, transmission_interface::JointHandle(hardware_interface::HW_IF_VELOCITY), jcmdh, limits,
       soft_limits)
   {
   }
@@ -489,11 +489,11 @@ public:
   VelocityJointSaturationHandle() {}
 
   VelocityJointSaturationHandle(
-    const hardware_interface::JointHandle & jvelh,  // currently unused
-    const hardware_interface::JointHandle & jcmdh,
+    const transmission_interface::JointHandle & jvelh,  // currently unused
+    const transmission_interface::JointHandle & jcmdh,
     const joint_limits_interface::JointLimits & limits)
   : JointLimitHandle(
-      hardware_interface::JointHandle(hardware_interface::HW_IF_POSITION), jvelh, jcmdh, limits)
+      transmission_interface::JointHandle(hardware_interface::HW_IF_POSITION), jvelh, jcmdh, limits)
   {
     if (!limits.has_velocity_limits)
     {
@@ -504,11 +504,11 @@ public:
   }
 
   VelocityJointSaturationHandle(
-    const hardware_interface::JointHandle & jcmdh,
+    const transmission_interface::JointHandle & jcmdh,
     const joint_limits_interface::JointLimits & limits)
   : JointLimitHandle(
-      hardware_interface::JointHandle(hardware_interface::HW_IF_POSITION),
-      hardware_interface::JointHandle(hardware_interface::HW_IF_VELOCITY), jcmdh, limits)
+      transmission_interface::JointHandle(hardware_interface::HW_IF_POSITION),
+      transmission_interface::JointHandle(hardware_interface::HW_IF_VELOCITY), jcmdh, limits)
   {
     if (!limits.has_velocity_limits)
     {
@@ -561,8 +561,8 @@ public:
   VelocityJointSoftLimitsHandle() {}
 
   VelocityJointSoftLimitsHandle(
-    const hardware_interface::JointHandle & jposh, const hardware_interface::JointHandle & jvelh,
-    const hardware_interface::JointHandle & jcmdh,
+    const transmission_interface::JointHandle & jposh, const transmission_interface::JointHandle & jvelh,
+    const transmission_interface::JointHandle & jcmdh,
     const joint_limits_interface::JointLimits & limits,
     const joint_limits_interface::SoftJointLimits & soft_limits)
   : JointSoftLimitsHandle(jposh, jvelh, jcmdh, limits, soft_limits)

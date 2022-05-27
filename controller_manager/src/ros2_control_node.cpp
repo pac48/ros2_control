@@ -23,8 +23,15 @@
 
 using namespace std::chrono_literals;
 
+
+//--ros-args --params-file /home/picknik/admittance_ws/install/ros2_control_demo_bringup/share/ros2_control_demo_bringup/config/admittance_demo_controllers.yaml --params-file /home/picknik/admittance_ws/install/rrbot_description/share/rrbot_description/admittance_demo/joint_limits_admittance.yaml
+
+
 int main(int argc, char ** argv)
 {
+
+
+
   rclcpp::init(argc, argv);
 
   std::shared_ptr<rclcpp::Executor> executor =
@@ -32,6 +39,10 @@ int main(int argc, char ** argv)
   std::string manager_node_name = "controller_manager";
 
   auto cm = std::make_shared<controller_manager::ControllerManager>(executor, manager_node_name);
+
+    for (int i =0; i < argc;i++){
+        RCLCPP_INFO(cm->get_logger(), "%s \n", argv[i]);
+    }
 
   // TODO(anyone): Due to issues with the MutliThreadedExecutor, this control loop does not rely on
   // the executor (see issue #260).

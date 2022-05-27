@@ -3,9 +3,12 @@ project(joint_limits_interface)
 
 find_package(ament_cmake REQUIRED)
 find_package(hardware_interface REQUIRED)
+find_package(transmission_interface REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(urdf REQUIRED)
 
+
+set(BUILD_TESTING 0)
 if(BUILD_TESTING)
   find_package(ament_cmake_gtest REQUIRED)
   find_package(ament_lint_auto REQUIRED)
