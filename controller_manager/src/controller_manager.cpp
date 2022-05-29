@@ -85,6 +85,9 @@ rclcpp::NodeOptions get_cm_node_options()
   // Required for getting types of controllers to be loaded via service call
   node_options.allow_undeclared_parameters(true);
   node_options.automatically_declare_parameters_from_overrides(true);
+//  for (auto param : node_options.parameter_overrides()){
+//      printf("%s", param.get_name().c_str());
+//  }
   return node_options;
 }
 
