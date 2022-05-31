@@ -24,7 +24,7 @@
 using namespace std::chrono_literals;
 
 
-//--ros-args --params-file /tmp/launch_params_vsl9xc0z --params-file  //tmp/launch_params_z8j0cytg --params-file /home/paul/admittance_ws/install/ros2_control_demo_bringup/share/ros2_control_demo_bringup/config/admittance_demo_controllers.yaml --params-file /home/paul/admittance_ws/install/rrbot_description/share/rrbot_description/admittance_demo/joint_limits_admittance.yaml
+//--ros-args --params-file  /tmp/launch_params_7wnz0z39  --params-file  /tmp/launch_params_kdcr0v2y --params-file /home/picknik/admittance_ws/install/ros2_control_demo_bringup/share/ros2_control_demo_bringup/config/admittance_demo_controllers.yaml --params-file /home/picknik/admittance_ws/install/rrbot_description/share/rrbot_description/admittance_demo/joint_limits_admittance.yaml
 
 ///home/paul/admittance_ws/install/controller_manager/lib/controller_manager/ros2_control_node --ros-args --params-file /tmp/launch_params_1gts9v52 --params-file /home/paul/admittance_ws/install/ros2_control_demo_bringup/share/ros2_control_demo_bringup/config/admittance_demo_controllers.yaml --params-file /tmp/launch_params_1md8u14e --params-file /home/paul/admittance_ws/install/rrbot_description/share/rrbot_description/admittance_demo/joint_limits_admittance.yaml
 
