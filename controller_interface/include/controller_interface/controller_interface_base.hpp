@@ -173,7 +173,7 @@ public:
   virtual bool set_chained_mode(bool chained_mode) = 0;
 
   /// Get information if a controller is currently in chained mode.
-  /**
+  /**state_interfaces_
    * Get information about controller if it is currently used in chained mode. In chained mode only
    * internal interfaces are available and all subscribers are expected to be disabled. This
    * prevents concurrent writing to controller's inputs from multiple sources.
