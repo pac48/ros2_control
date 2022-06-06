@@ -53,6 +53,14 @@ public:
     const geometry_msgs::msg::TransformStamped & control_frame_to_ik_base,
     std::vector<double> & delta_theta_vec) = 0;
 
+    /**
+   * \brief Calculates the end effector position last set robot state.
+   * \param end_effector_position output vector with end effector position
+   * \return true if successful
+   */
+    virtual bool
+    calculate_end_effector_position(std::vector<double> & end_effector_position) = 0;
+
   /**
    * \brief Convert joint delta-theta to Cartesian delta-x, using the Jacobian.
    * \param[in] delta_theta_vec vector with joint states

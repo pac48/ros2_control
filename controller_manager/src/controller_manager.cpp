@@ -268,7 +268,9 @@ controller_interface::ControllerInterfaceBaseSharedPtr ControllerManager::load_c
   }
   if (chainable_loader_->isClassAvailable(controller_type))
   {
-    controller = chainable_loader_->createSharedInstance(controller_type);
+      std::shared_ptr<controller_interface::ChainableControllerInterface> controllerChain = chainable_loader_->createSharedInstance(controller_type);
+      auto refs = controllerChain->export_reference_interfaces();
+      resource_manager_->import_controller_reference_interfaces(controller_type, refs);
   }
 
   ControllerSpec controller_spec;
