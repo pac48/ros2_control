@@ -25,13 +25,13 @@
 #include "rclcpp/rclcpp.hpp"
 
 
-namespace ik_interface
+namespace kinematics_interface
 {
-class IKBaseClass
+class KinematicsBaseClass
 {
 public:
-  IKBaseClass();
-  ~IKBaseClass();
+    KinematicsBaseClass();
+  ~KinematicsBaseClass();
 
   /**
    * \brief Create an object which takes Cartesian delta-x and converts to joint delta-theta.
@@ -48,18 +48,17 @@ public:
    * \return true if successful
    */
   virtual bool
-  convert_cartesian_deltas_to_joint_deltas(
-    std::vector<double> & delta_x_vec,
-    const geometry_msgs::msg::TransformStamped & control_frame_to_ik_base,
-    std::vector<double> & delta_theta_vec) = 0;
+  convert_cartesian_deltas_to_joint_deltas(std::vector<double> & delta_x_vec, std::vector<double> & delta_theta_vec) = 0;
 
     /**
-   * \brief Calculates the end effector position last set robot state.
-   * \param end_effector_position output vector with end effector position
-   * \return true if successful
-   */
+    * \brief Calculates the joint transform specified by segment name using the last set robot state.
+    * \param transform_vec output vector with three element of the segment's position and 9 elements of
+    * the segments rotation matrix in column major format.
+     *\param segment_name the name of the segment to find the transform for
+    * \return true if successful
+    */
     virtual bool
-    calculate_end_effector_position(std::vector<double> & end_effector_position) = 0;
+    calculate_segment_transform(std::vector<double> & transform_vec, const std::string & segment_name) = 0;
 
   /**
    * \brief Convert joint delta-theta to Cartesian delta-x, using the Jacobian.
@@ -69,10 +68,7 @@ public:
    * \return true if successful
    */
   virtual bool
-  convert_joint_deltas_to_cartesian_deltas(
-    std::vector<double> &  delta_theta_vec,
-    const geometry_msgs::msg::TransformStamped & tf_ik_base_to_desired_cartesian_frame,
-    std::vector<double> & delta_x_vec) = 0;
+  convert_joint_deltas_to_cartesian_deltas(std::vector<double> &  delta_theta_vec, std::vector<double> & delta_x_vec) = 0;
 
   /**
    * \brief Update the state of the robot in the IK solver
@@ -80,6 +76,6 @@ public:
   virtual bool update_robot_state(const trajectory_msgs::msg::JointTrajectoryPoint & current_joint_state) = 0;
 };
 
-}  // namespace ik_interface
+}  // namespace kinematics_interface
 
 #endif  // IK_PLUGIN_BASE__IK_PLUGIN_BASE_HPP_

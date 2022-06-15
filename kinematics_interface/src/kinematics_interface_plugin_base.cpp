@@ -15,15 +15,15 @@
 /// \author: Andy Zelenak
 /// \description: Base class for differential kinematics plugins
 
-#include "ik_interface/ik_plugin_base.hpp"
+#include "kinematics_interface/kinematics_interface_plugin_base.hpp"
 
-namespace ik_interface
+namespace kinematics_interface
 {
-    IKBaseClass::IKBaseClass() {
+    KinematicsBaseClass::KinematicsBaseClass() {
 
     }
 
-    IKBaseClass::~IKBaseClass(){
+    KinematicsBaseClass::~KinematicsBaseClass(){
 
     }
 
