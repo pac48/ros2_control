@@ -54,6 +54,7 @@ if(BUILD_TESTING)
   find_package(ament_cmake_gtest REQUIRED)
   find_package(ament_lint_auto REQUIRED)
   find_package(ros2_control_test_assets REQUIRED)
+  find_package(realtime_tools REQUIRED)
 
   list(APPEND AMENT_LINT_AUTO_EXCLUDE
     ament_cmake_uncrustify
@@ -98,6 +99,8 @@ if(BUILD_TESTING)
   install(TARGETS test_chainable_controller
     DESTINATION lib
   )
+  ament_target_dependencies(test_chainable_controller realtime_tools)
+
 
   ament_add_gmock(
     test_controller_manager
