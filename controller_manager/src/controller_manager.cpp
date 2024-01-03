@@ -2024,6 +2024,11 @@ std::pair<std::string, std::string> ControllerManager::split_command_interface(
 
 unsigned int ControllerManager::get_update_rate() const { return update_rate_; }
 
+bool ControllerManager::is_urdf_already_loaded() const
+{
+  return resource_manager_->is_urdf_already_loaded();
+}
+
 void ControllerManager::propagate_deactivation_of_chained_mode(
   const std::vector<ControllerSpec> & controllers)
 {

@@ -60,6 +60,12 @@ int main(int argc, char ** argv)
         RCLCPP_INFO(cm->get_logger(), "RT kernel is recommended for better performance");
       }
 
+      while (!cm->is_urdf_already_loaded())
+      {
+        RCLCPP_INFO(cm->get_logger(), "Waiting for URDF to be loaded before starting control loop");
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+      }
+
       // for calculating sleep time
       auto const period = std::chrono::nanoseconds(1'000'000'000 / cm->get_update_rate());
       auto const cm_now = std::chrono::nanoseconds(cm->now().nanoseconds());
